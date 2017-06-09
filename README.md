@@ -17,7 +17,7 @@ Enter IMDB ID or Title: tt2395427
 </i>
 <br>
 <hr>
-<b>Input:</b>
+<b>Input:</b><br>
 Enter IMDB ID or Title:  harry potter 6
 
 <b>Output:</b><br>
