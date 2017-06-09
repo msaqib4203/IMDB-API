@@ -7,7 +7,7 @@ import json
 def getJSON(html):
 			
 	data = {}
-	data['poster'] = html.find('img')['src']
+	data['poster'] = html.find(attrs={'class':'poster'}).find('img')['src']
 	data['title'] =  html.find(itemprop='name').text.strip()
 	data['rating'] = html.find(itemprop='ratingValue').text
 	data['bestRating'] = html.find(itemprop='bestRating').text
