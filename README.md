@@ -9,7 +9,7 @@ A python script which takes imdb ID or movie title as input and outputs a JSON o
 
 # Usage
 
-<b>Input:</b><br>
+<b>Input:</b>
 Enter IMDB ID or Title: tt2395427
 
 <b>Output:</b><br>
@@ -25,3 +25,4 @@ Enter IMDB ID or Title:  harry potter 6
 </i>
 <br><hr>
 <h5>Feel free to use or suggest any changes. Thank You! &#128519;</h5>
+<hr>
