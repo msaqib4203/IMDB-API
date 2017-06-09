@@ -1,16 +1,10 @@
 #Dependancies
 from bs4 import BeautifulSoup
-import urllib2
+import requests
 import json
 
-def getJSON(imdb_id):
-	try:
-		response = urllib2.urlopen('http://www.imdb.com/title/'+imdb_id+'/')
-		html = response.read()
-		html = BeautifulSoup(html,'html.parser')
-		
-	except Exception as e:
-		return 'Invalid IMDB ID or Network Error!'
+
+def getJSON(html):
 			
 	data = {}
 	data['poster'] = html.find('img')['src']
@@ -49,6 +43,26 @@ def getJSON(imdb_id):
 	json_data = json.dumps(data)
 	return json_data
 	
-imdbid = raw_input("Enter IMDB ID: ")
+def getHTML(url):
+	response = requests.get(url)
+	return BeautifulSoup(response.content,'html.parser')	
+	
+def getURL(input):
+	try:
+		if input[0] == 't' and input[1] == 't':
+			html = getHTML('http://www.imdb.com/title/'+input+'/')
+			
+		else:
+			html = getHTML('https://www.google.co.in/search?q='+input)
+			for cite in html.findAll('cite'):
+				if 'imdb.com/title/tt' in cite.text:
+					html = getHTML('http://'+cite.text)
+					break
+		return getJSON(html)	
+	except Exception as e:
+		return 'Invalid input or Network Error!'
+		
+	
+input = raw_input("Enter IMDB ID or Title: ")
 print('Getting information, Please Wait....')
-print(getJSON(imdbid))
+print(getURL(input))
