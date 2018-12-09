@@ -17,9 +17,11 @@ def parsePersons(persons):
 
 def getJSON(html):
 
+	data = {}
+	data['id'] =  html.find(attrs={'property':'pageId'})['content']
+	data['url'] = 'https://www.imdb.com/title/'+data['id']
 	html_json =  html.find(attrs={'type':'application/ld+json'}).text.strip()
 	fetchedJson = json.loads(html_json)
-	data = {}
 	data['poster'] = html.find(attrs={'class':'poster'}).find('img')['src']
 	title_wrapper =  html.find(attrs={'class':'title_wrapper'}).text.strip()
 	data['title'] = title_wrapper[:title_wrapper.find(')')+1]
